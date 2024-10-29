@@ -1,0 +1,89 @@
+﻿@page
+@model CandidateManagement_MaiVanQuocTinh.Pages.LoginModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        .header {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .login-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+            .login-form h1 {
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+                text-align: center;
+                color: #333;
+            }
+
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary, .btn-danger {
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .btn-danger {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body1>
+    <div class="login-form">
+        <h1>Login Form</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="txtEmail">Email:</label>
+                <input id="txtEmail" name="txtEmail" type="text" class="form-control" value="admin@hr.com.vn" />
+            </div>
+            <div class="form-group">
+                <label for="txtPassword">Password:</label>
+                <input id="txtPassword" name="txtPassword" type="password" class="form-control" value="123@@" />
+            </div>
+            <button type="submit" class="btn btn-primary" name="btnLogin">Login</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+        </form>
+    </div>
+</body1>
+</html>

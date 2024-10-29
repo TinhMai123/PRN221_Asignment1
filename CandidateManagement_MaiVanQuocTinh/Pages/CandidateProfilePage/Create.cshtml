@@ -1,0 +1,77 @@
+﻿@page
+@model CandidateManagement_MaiVanQuocTinh.Pages.Tinh.CreateModel
+
+@{
+    ViewData["Title"] = "Create Candidate Profile";
+    String RoleID = HttpContext.Session.GetString("RoleID");
+    if (RoleID != "1")
+    {
+        Response.Redirect("/NotPermission");
+    }
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <h1 class="text-center">Create Candidate Profile</h1>
+            <hr />
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="text-primary">Candidate Profile</h4>
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.CandidateId" class="form-label"></label>
+                            <input asp-for="CandidateProfile.CandidateId" class="form-control" />
+                            <span asp-validation-for="CandidateProfile.CandidateId" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.Fullname" class="form-label"></label>
+                            <input asp-for="CandidateProfile.Fullname" class="form-control" />
+                            <span asp-validation-for="CandidateProfile.Fullname" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.Birthday" class="form-label"></label>
+                            <input asp-for="CandidateProfile.Birthday" type="date" class="form-control" />
+                            <span asp-validation-for="CandidateProfile.Birthday" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.ProfileShortDescription" class="form-label"></label>
+                            <textarea asp-for="CandidateProfile.ProfileShortDescription" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="CandidateProfile.ProfileShortDescription" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.ProfileUrl" class="form-label"></label>
+                            <input asp-for="CandidateProfile.ProfileUrl" type="url" class="form-control" />
+                            <span asp-validation-for="CandidateProfile.ProfileUrl" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CandidateProfile.PostingId" class="form-label"></label>
+                            <select asp-for="CandidateProfile.PostingId" class="form-select" asp-items="ViewBag.PostingId"></select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-page="Index" class="btn btn-outline-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
