@@ -1,0 +1,47 @@
+﻿@page
+@model CandidateManagement_MaiVanQuocTinh.Pages.JobPostingPage.DetailsModel
+
+@{
+    ViewData["Title"] = "Job Posting Details";
+}
+
+<div class="container mt-4">
+    <h1 class="text-primary">Job Posting Details</h1>
+    <div class="card shadow-sm mt-3">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Job Posting Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.JobPosting.JobPostingTitle)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.JobPosting.JobPostingTitle)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.JobPosting.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.JobPosting.Description)
+                </dd>
+
+                <dt class="col-sm-3 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.JobPosting.PostedDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.JobPosting.PostedDate)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-right">
+            <a asp-page="./Edit" asp-route-id="@Model.JobPosting?.PostingId" class="btn btn-warning mr-2">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-page="./Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    </div>
+</div>

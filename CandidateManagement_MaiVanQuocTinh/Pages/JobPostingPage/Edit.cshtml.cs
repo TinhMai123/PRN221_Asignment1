@@ -10,55 +10,53 @@ using CandidateManagement_BussinesObject;
 using CandidateManagement_DAO;
 using CandidateManagement_Service;
 
-namespace CandidateManagement_MaiVanQuocTinh.Pages.Tinh
+namespace CandidateManagement_MaiVanQuocTinh.Pages.JobPostingPage
 {
     public class EditModel : PageModel
     {
-        private readonly ICandidateProfileService _candidateProfileService;
         private readonly IJobPostingService _jobPostingService;
 
 
-        public EditModel(ICandidateProfileService candidate, IJobPostingService jobPosting)
+        public EditModel(IJobPostingService jobPostings)
         {
-            _candidateProfileService = candidate;
-            _jobPostingService = jobPosting;
+            _jobPostingService = jobPostings;
         }
 
         [BindProperty]
-        public CandidateProfile CandidateProfile { get; set; } = default!;
+        public JobPosting JobPosting { get; set; } = default!;
 
         public IActionResult OnGet(string id)
         {
-            if (id == null || _candidateProfileService.GetCandidateProfiles() == null)
+            if (id == null || _jobPostingService.GetJobPostings == null)
             {
                 return NotFound();
             }
 
-            var candidateprofile =   _candidateProfileService.GetCandidateProfileById(id);
-            if (candidateprofile == null)
+            var jobposting = _jobPostingService.GetJobPosting(id);
+            if (jobposting == null)
             {
                 return NotFound();
             }
-            CandidateProfile = candidateprofile;
-           ViewData["PostingId"] = new SelectList(_jobPostingService.GetJobPostings(), "PostingId", "JobPostingTitle");
+            JobPosting = jobposting;
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public IActionResult OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+
             try
             {
-                _candidateProfileService?.UpdateCandidateProfile(CandidateProfile);
+                _jobPostingService?.UpdateJobPosting(JobPosting);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CandidateProfileExists(CandidateProfile.CandidateId))
+                if (!JobPostingExists(JobPosting.PostingId))
                 {
                     return NotFound();
                 }
@@ -71,9 +69,10 @@ namespace CandidateManagement_MaiVanQuocTinh.Pages.Tinh
             return RedirectToPage("./Index");
         }
 
-        private bool CandidateProfileExists(string id)
+        private bool JobPostingExists(string id)
         {
-          return _candidateProfileService.GetCandidateProfileById(id) != null ;
+            return _jobPostingService.GetJobPosting(id) != null;
         }
     }
+
 }

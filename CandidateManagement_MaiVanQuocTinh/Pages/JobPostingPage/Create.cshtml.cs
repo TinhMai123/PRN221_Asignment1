@@ -9,38 +9,36 @@ using CandidateManagement_BussinesObject;
 using CandidateManagement_DAO;
 using CandidateManagement_Service;
 
-namespace CandidateManagement_MaiVanQuocTinh.Pages.Tinh
+namespace CandidateManagement_MaiVanQuocTinh.Pages.JobPostingPage
 {
     public class CreateModel : PageModel
     {
-        private readonly ICandidateProfileService _profileService;
         private readonly IJobPostingService _postingService;
 
 
-        public CreateModel(ICandidateProfileService candidate, IJobPostingService jobPosting)
+        public CreateModel(IJobPostingService jobPostings)
         {
-            _profileService = candidate;
-            _postingService = jobPosting;
+            _postingService = jobPostings;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["PostingId"] = new SelectList(_postingService.GetJobPostings(), "PostingId", "JobPostingTitle");
             return Page();
         }
 
         [BindProperty]
-        public CandidateProfile CandidateProfile { get; set; } = default!;
+        public JobPosting JobPosting { get; set; } = default!;
         
+
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
-          if (!ModelState.IsValid || _profileService.GetCandidateProfiles() == null || CandidateProfile == null)
+          if (!ModelState.IsValid || _postingService.GetJobPostings == null || JobPosting == null)
             {
                 return Page();
             }
-
-            _profileService.AddCandidateProfile(CandidateProfile);
-
+            _postingService.AddJobPosting(JobPosting);
+             
             return RedirectToPage("./Index");
         }
     }

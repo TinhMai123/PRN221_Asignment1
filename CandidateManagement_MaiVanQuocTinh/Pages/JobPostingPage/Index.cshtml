@@ -1,0 +1,40 @@
+﻿@page
+@model CandidateManagement_MaiVanQuocTinh.Pages.JobPostingPage.IndexModel
+
+@{
+    ViewData["Title"] = "Job Postings";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+
+    <div class="text-end mb-3">
+        <a asp-page="Create" class="btn btn-primary">Create New Job Posting</a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.JobPosting[0].JobPostingTitle)</th>
+                <th>@Html.DisplayNameFor(model => model.JobPosting[0].Description)</th>
+                <th>@Html.DisplayNameFor(model => model.JobPosting[0].PostedDate)</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.JobPosting)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.JobPostingTitle)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PostedDate)</td>
+                    <td class="text-center">
+                        <a asp-page="./Edit" asp-route-id="@item.PostingId" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.PostingId" class="btn btn-sm btn-info">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.PostingId" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

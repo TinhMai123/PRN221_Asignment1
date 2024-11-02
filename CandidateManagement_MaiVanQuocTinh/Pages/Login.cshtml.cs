@@ -26,7 +26,7 @@ namespace CandidateManagement_MaiVanQuocTinh.Pages
             if (hraccount != null && hraccount.Password == password)
             {
                 HttpContext.Session.SetString("RoleID", hraccount.MemberRole.ToString());
-                Response.Redirect("/CandidateProfilePage");
+                Response.Redirect("/JobPostingPage");
             }
             else
             {
